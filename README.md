@@ -6,7 +6,9 @@ Entorno de Programación CI - 2023
 Cada estudiante deberá agregar un directorio con su apellido y nombre en este repositorio en `estudiantes/`. Luego, cada estudiante tendrá dos directorios raíces `ejercicios/` y `tp/`. En `ejercicios/` estarán las resoluciones de los problemas de las guía de bash que se encuentra en el raíz de este repositorio (`bash_guide.md`). A medida que van resolviendo los ejercicios y el Trabajo Práctico deberán realizar sucesivas PRs, quienes serán aprobadas por los docentes de la cátedra y finalmente mergeadas a la rama `main`. Si sus resoluciones están mergeadas significa que están aprobadas.
 
 ### Preparando la primer PR
-1. Clonar el repo:
+0. Hacer un fork del repositorio
+
+1. Clonar el repo forkeado (el de su cuenta de github)
 ```
 git clone <url_a_este_repo>
 ```
