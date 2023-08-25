@@ -1,0 +1,7 @@
+#!/bin/bash
+echo Ingrese su nombre
+read var
+
+echo Hola mundo $var > archivo.13
+
+
