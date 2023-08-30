@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+	echo Use dos números como argumento 
+	exit 1
+fi
+
+num1=$1
+num2=$2
+
+if [ $((num1 % num2)) -eq 0 ]; then
+	echo $num1 es divisible por $num2
+else
+	echo $num1 no es divisible por $num2
+fi
