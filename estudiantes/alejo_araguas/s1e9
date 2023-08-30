@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mkdir dir.a
+
+cd dir.a
+
+mkdir dir.b dir.c
+
+cd dir.b
+
+touch file.a file.b
+
+cd ..
+
+cd dir.c
+
+ln -s ../dir.b/file.a ../dir.c/link.a
