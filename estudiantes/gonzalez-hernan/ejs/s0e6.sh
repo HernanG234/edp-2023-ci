@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUTS_DIR="outputs"
+source .env
 
 if [ ! -d $OUTPUTS_DIR ]; then
 	mkdir $OUTPUTS_DIR
