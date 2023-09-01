@@ -14,14 +14,23 @@ Las subsecciones que se detallan abajo corresponden a las diapositivas de la Uni
 ## Ejercicios
 ### Sección 1.
 0. Imprimir "Hola mundo" a stdout.
+
 1. Hacer un script de bash que imprima "Hola Mundo!".
+
 2. Darle permisos de ejecución del script anterior al usuario.
+
 3. Ejecutar el script. Existen dos formas, probar ambas. 
+
 4. Investigar las variables de entorno que ya están definidas. (Ver `printenv`!)
+
 5. Imprimir "Hola `<nombre de usuario>`" a stdout (por consola). Del ejercicio 4, buscar la variable de entorno que tiene esta información.
+
 6. Idem anterior pero que escriba la salida a un archivo `archivo.6`.
+
 7. Ejecutar el comando "yes" y deternerlo con Ctrl+C.
+
 8. Ejecutar el comando "yes" y deternerlo con Ctrl+Z. Reanudarlo en primer plano con "fg", deternerlo con Ctrl+C.
+
 9. Hacer un script que luego de ejecutarse en un directorio genere el siguiente arbol:
 ```
 ~$ tree
@@ -35,7 +44,9 @@ Las subsecciones que se detallan abajo corresponden a las diapositivas de la Uni
 
 4 directories, 3 files
 ```
+
 10. Hacer un script `ej.9.sh` que imprima "Hola mundo $var" a `stdout`. La variable `var` se define al comienzo del script.
+
 11. Crear `ej.10.sh` y ejecutar este script:
 ```bash
 #!/bin/bash
@@ -57,10 +68,15 @@ echo "Hola `echo $NOMBRE2`"
 echo "Hola `echo $NOMBRE3`"
 ```
 Predecir que ocurrirá en cada caso antes de ejecutarlo. Chequear e interpretar que ocurrió.
+
 12. Hacer un script `ej.11.sh` que imprima "Hola mundo $var" a `stdout`. La variable `var` se ingresa como primer argumento.
+
 13. Item anterior pero imprimiendo la salida a un `archivo.13`.
+
 14. Imprimir el contenido de la variable PATH a un archivo `PATH.bkp`
+
 15. Copiar el script del ejercicio 5 ("Hola `<nombre de usuario>`") en `bin/hola` (`bin` es un directorio, crearlo, `hola` es el nombre del archivo). Agregar esta ruta al `PATH`.
+
 16. Crear el siguiente script como `ej.16.sh`:
 ```bash
 #!/bin/bash
@@ -69,23 +85,32 @@ ls a
 ls b
 ```
 Ejecutarlo, observar comportamiento. Redirigir la salida `1` a `ej.16.out` y la salida dos a `ej.16.err`.
+
 17. Ejecutar el script anterior pero esta vez descartar ambas salidas. (Chequear diapositiva 18)
 
 ### Sección 2.
 
 0. Hacer un script que reciba un número y determine si es par o impar.
+
 1. Hacer un script que reciba dos números y determine si el primero es divisible por el segundo.
+
 2. Hacer un script que reciba un año y determine si es un año bisiesto o no. Ver https://es.wikipedia.org/wiki/A%C3%B1o_bisiesto.
+
 3. Extender el script anterior para que imprima la cantidad de días, horas, minutos y segundos que abarca ese año.
+
 4. Hacer un script que reciba el nombre de un archivo e imprima en pantalla si este tiene permisos de lectura, escritura o ejecución.
+
 5. Hacer un script que en el directorio actual valide el resultado del Ejercicio 9 (Sección 1).
+
 6. Hacer un script que reciba como argumento una ruta (absoluta o relativa), chequear que la misma existe en el sistema de archivos y luego imprimir en pantalla si es de alguno de los siguientes tipos:
    * "archivo": archivo regular.
    * "directorio": directorio.
    * "device": block device o character device.
    * "link": hard link o symbolic link.
    * "otro": ninguno de los casos anteriores.
+
 7. Hacer un script que recibe como primer argumento un comando de bash y luego cualquier cantidad variable de argumentos. El script debe llamar al comando de bash con todos estos argumentos. Ayuda: ver el comando `shift` y la variable `$@`.
+
 8. Crear y ejecutar el siguiente script:
 ```bash
 #!/bin/bash
@@ -103,8 +128,10 @@ for i in {1..10}; do
     touch $FILESDIR/$FILENAME
 done
 ```
+
 Analizar qué hace pragmáticamente (correrlo y ver qué pasa). 
 Ordenar los archivos creados segun su extensión (utilizando `case`), según las siguientes categorías.
+
 ```
 sorted_files
     ├── code
@@ -121,27 +148,43 @@ sorted_files
 
 ### Sección 3
 1. Crea un script que liste todos los archivos en el directorio actual que comienzan con una letra mayúscula.
+
 2. Modifica el script anterior para que solo liste los archivos con extensión .txt.
+
 3. Crea un script que liste todos los directorios en el directorio actual. (ver `ls -d`)
+
 4. Modifica el script anterior para que solo liste los directorios con un nombre que contenga la letra e.
+
 5. Crea un script que busque la palabra "manzana" en un archivo e imprima la línea en la que aparece. (ver `grep`). Corra este comando para tener un archivo de ejemplo:
 ```
 curl https://demo.hedgedoc.org/s/NS-deBAHz/download > manzana.txt
 ```
+
 6. Modifica el script anterior para que también busque la palabra "colesterol".
+
 7. Crea un script que busque cualquier número de teléfono en un archivo que esté en el formato XXX-XXX-XXXX.
+
 8. Crea un script que busque cualquier dirección de correo electrónico en un archivo.
+
 9. Crea un script que solicite al usuario que ingrese un número entre 1 y 5 e imprima un mensaje según el número ingresado.
+
 10. Crea un script que solicite al usuario que ingrese una letra e imprima un mensaje según si la letra es una vocal o una consonante.
+
 11. Crea un script que solicite al usuario que ingrese una contraseña y verifique si cumple con los siguientes criterios: al menos 8 caracteres, contiene al menos una letra mayúscula, contiene al menos una letra minúscula y contiene al menos un número.
+
 12. Crea un script que solicite al usuario que ingrese una oración e imprima un mensaje según si la oración termina con un punto, signo de exclamación o signo de interrogación.
 
 ### Sección 4
 1. Escribe un script que imprima todos los números pares del 1 al 30.
+
 2. Crea un script que solicite al usuario ingresar un número y luego calcule la suma de todos los números desde 1 hasta ese número.
+
 3. Diseña un script que cuente y muestre la cantidad de archivos que hay en un directorio específico. Pasar por parametro el directorio a evaluar y verificar que sea un directorio.
+
 4. La Secuencia de Fibonacci queda definida por la ecuaciones f(0)=0 , f(1)=1 y f(n)=f(n-1)+f(n-2); con n>=2. Quedando una secuencia infinita: 0,1,1,2,3,5,8... . Crear un script que imprima los primeros 20 números de la Secuencia de Fibonacci.
+
 5. Crea un script que solicite al usuario ingresar un número y calcule su factorial (el producto de todos los números enteros positivos desde 1 hasta el número ingresado). No salir del script hasta que se introduzca la x o X.
+
 6. Crear un script que dibuje un cuadrado con asteriscos y tenga de lado 4 asteriscos
 ```
 * * * *
@@ -157,6 +200,7 @@ curl https://demo.hedgedoc.org/s/NS-deBAHz/download > manzana.txt
 * * *
 * * * *
 ```
+
 9. Crear un script que dibuje un triangulo con asteriscos y tenga de base 4 asteriscos, pero la punta este en el medio de la base
 ```
    *
@@ -169,13 +213,21 @@ curl https://demo.hedgedoc.org/s/NS-deBAHz/download > manzana.txt
 En todos los ejercicios, validar los argumentos de entrada, devolver distintos exit codes en los casos en que los argumentos sean inválidos.
 
 1. Cree una función que imprima "¡Hola, mundo!" cuando se llame.
+
 2. Cree una función que tome dos argumentos y muestre su suma.
+
 3. Cree una función que tome un nombre de archivo como argumento y cuente el número de líneas en el archivo.
+
 4. Cree una función que tome un número entero como argumento y verifique si es par o impar.
+
 5. Cree una función que tome un archivo como argumento y verifique si existe.
+
 6. Cree una función que tome una cadena de texto (string) como argumento y muestre cada carácter en una nueva línea. (Ver `${#VAR}` y `${VAR:a:b}`)
+
 7. Cree una función que tome dos números como argumentos y devuelva su producto.
+
 8. Cree una función que tome un directorio como argumento y liste todos los archivos en el directorio.
+
 9. Cree una función que tome una cadena como argumento y devuelva la cadena en orden inverso.
 
 ### Sección 6
@@ -293,8 +345,8 @@ Por ejemplo, john.doe@example.com, jane.smith@example.com, etc." > emails.txt
     cat access.log | awk '{print $1}' | sort | uniq | wc -l
     ```
     </details>
-8. Listar las 5 palabras más frecuentes en el archivo de texto `archivo.txt`.
 
+8. Listar las 5 palabras más frecuentes en el archivo de texto `archivo.txt`.
     <details>
     <summary>Respuesta sugerida:</summary>
     
@@ -304,7 +356,6 @@ Por ejemplo, john.doe@example.com, jane.smith@example.com, etc." > emails.txt
     </details>
 
 9. Extraer todas las direcciones de correo electrónico del archivo de texto `emails.txt`.
-
     <details>
     <summary>Respuesta sugerida:</summary>
     
@@ -314,7 +365,6 @@ Por ejemplo, john.doe@example.com, jane.smith@example.com, etc." > emails.txt
     </details>
 
 10. Calcular la suma de los números en el archivo `archivo.txt`.
-
     <details>
     <summary>Respuesta sugerida:</summary>
     
