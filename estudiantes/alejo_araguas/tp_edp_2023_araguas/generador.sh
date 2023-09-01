@@ -7,7 +7,6 @@ echo 3- Archivo de imágen.
 echo 0- Salir al menú.
 echo Escriba el número de su selección: ; read opc
 
-[ opc  ]
 if [ $opc -eq 1 ]; then
 	base64 /dev/urandom | head -c 500 > file.txt
 	echo ¡Archivo de texto generado!
@@ -27,3 +26,6 @@ else
 	echo Número incorrrecto.
 	exit 0
 fi
+convert -size 100x100 xc: +noise Random noise.png
+
+	base64 /dev/urandom | head -c 500 > file.txt
