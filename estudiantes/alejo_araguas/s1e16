@@ -1,0 +1,7 @@
+#!/bin/bash
+touch a
+ls a
+ls b
+exit 1 > ej.16.out
+exit 2 > ej.16.err
+

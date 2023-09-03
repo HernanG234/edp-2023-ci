@@ -28,3 +28,5 @@ git checkout -b gonzalez-ej-s1e0
 
 7. Volver a la rama main para crear la nueva rama con la nueva solución
 
+### Flujo de trabajo con PRs
+![git flow tp](./gitflowtp.svg)
