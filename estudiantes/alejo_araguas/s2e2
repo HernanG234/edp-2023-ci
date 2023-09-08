@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+	echo Ingrese un año
+	exit 1
+fi
+
+year=$1
+
+if (( year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) )); then
+	echo $year es un año bisiesto
+else
+	echo $year no es un año bisiesto
+fi
