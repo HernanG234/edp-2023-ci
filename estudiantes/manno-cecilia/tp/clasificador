@@ -1,2 +1,8 @@
 #!/bin/bas
-file
+#perdon profe, te juro que lo intento
+#recibe archivo imaginario mientras el  downloader aun no existe
+
+
+case ["archivo imaginario" file] in
+	-eq TEXT
+		mv "archivo imaginatio"
