@@ -1,0 +1,13 @@
+#!/bin/bash
+
+fecha=$(date +"%d_%m_%y:%H_%M_%S")
+
+uso_cpu=$(top -b -n 1 | grep "%Cpu(s)" | awk '{print $2}' | awk -F. '{print $1}')
+uso_ram=$(free | awk '/Mem/ {printf "%.2f", $3/$2*100}')
+nro_procesos=$(ps aux --no-heading | wc -l)
+espacio_libre_disco=$(df -h --output=avail / | sed -n '2p')
+
+nombre_archivo="report_${fecha}.txt"
+ruta_archivo="$PWD/$nombre_archivo"
+
+echo "Reporte generado y guardado en el archivo $ruta_archivo."
