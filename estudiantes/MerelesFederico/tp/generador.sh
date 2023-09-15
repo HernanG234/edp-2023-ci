@@ -2,28 +2,22 @@
 
 # Generamos un archivo texto
 
-SELECT=$(( 3 * $RANDOM / 32767 +1))
+SELECT=$(($RANDOM % 3 + 1))
 
 if [ $SELECT = 1 ]
-
 then
 
 	base64 /dev/urandom | head -c 500 > file.txt
 
 	NombreTxt=($(md5sum file.txt)) # Obtenemos el hash de verificacion
 
-	echo "texto generado" 
-
-	
+	echo "texto generado"
 
 
-	mv file.txt $NombreTxt  # Renombramos al archivo
-	
-	mv $NombreTxt /home/twentyonepilots/Desktop/edp-2023-ci/estudiantes/MerelesFederico/tp/outputs
+	mv file.txt ./outputs/$NombreTxt # Movemos el archivo y lo renombramos con su hash correspondiente.
 
-	
+
 elif [ $SELECT == 2 ]
-
 then
 
 	# Generamos un archivo de audio
@@ -33,9 +27,7 @@ then
 
 	NombreAudio=($(md5sum out.wav)) # Obtenemos el hash de verificacion
 
-	mv out.wav $NombreAudio
-
-	mv $NombreAudio /home/twentyonepilots/Desktop/edp-2023-ci/estudiantes/MerelesFederico/tp/outputs
+	mv out.wav ./outputs/$NombreAudio # Movemos el archivo generado y lo renombramos con su hash correspondiente.
 
 else
 	# Generamos un archivo de imagen
@@ -45,10 +37,7 @@ else
 
 	NombreImagen=($(md5sum noise.png)) # obtenemos el hash de verificacion
 
-	mv noise.png $NombreImagen
-	
-	mv $NombreImagen /home/twentyonepilots/Desktop/edp-2023-ci/estudiantes/MerelesFederico/tp/outputs
+	mv noise.png ./outputs/$NombreImagen # Movemos el archivo generado y lo renombramos con su hash correspondiente.
 
-	
 fi
 
