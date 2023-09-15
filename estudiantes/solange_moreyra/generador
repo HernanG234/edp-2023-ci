@@ -1,0 +1,9 @@
+#!/bin/bash
+#texto
+base64 /dev/urandom | head -c 500 > file.txt
+#sonido
+ffmpeg -f lavfi -i "sine=frequency=1000:duration=5" out.wav
+#imagenes
+convert -size 100x100 xc: +noise Random noise.png
+
+
