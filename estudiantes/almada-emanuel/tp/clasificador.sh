@@ -1,33 +1,37 @@
 #!/bin/bash 
 
-mkdir -p outputs/
-mkdir -p outputs/txt/ 
-mkdir -p outputs/snd/ 
-mkdir -p outputs/img/ 
+inputs=input_downloader/
+
+mkdir -p outputs_clasificador/
+mkdir -p outputs_clasificador/txt/ 
+mkdir -p outputs_clasificador/snd/ 
+mkdir -p outputs_clasificador/img/ 
 
 n_img=1
 n_txt=1
 n_snd=1
 
-# while o for 
+for i in $(ls $inputs/)
+do
 
-dwnld=$(file $1) # archivos de la carpeta
+ dwnld=$(file $1) # archivos de la carpeta
 
 
-if [[ $dwnld =~ "ASCII" ]]; then
-   mv $1 outputs/txt/ 
-   mv outputs/txt/$1 outputs/txt/texto${n_txt}.txt
+ if [[ $dwnld =~ "ASCII" ]]; then
+   mv $1 outputs_clasificador/txt/ 
+   mv outputs_clasificador/txt/$1 outputs_clasificador/txt/texto${n_txt}.txt
    n_txt=$((n_txt+1))
 
-elif [[ $dwnld =~ "RIFF" ]]; then
-	mv $1 outputs/snd/
-        mv outputs/snd/$1 outputs/snd/sonido${n_snd}.wav
+ elif [[ $dwnld =~ "RIFF" ]]; then
+	mv $1 outputs_clasificador/snd/
+        mv outputs_clasificador/snd/$1 outputs_clasificador/snd/sonido${n_snd}.wav
 	n_snd=$((n_snd+1))
 
-else 
-	mv $1 outputs/img/
-	mv outputs/img/$1 outputs/img/imagen${n_img}.png
+ else 
+	mv $1 outputs_clasificador/img/
+	mv outputs_clasificador/img/$1 outputs_clasificador/img/imagen${n_img}.png
 	n_img=$((n_img+1))
 
-fi 
-
+ fi 
+ $cant_archivos=$(($cant_archivos-1))
+done
