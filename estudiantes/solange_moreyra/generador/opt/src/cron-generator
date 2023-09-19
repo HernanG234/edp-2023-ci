@@ -1,0 +1,21 @@
+#!/bin/bash
+
+ouput_dir=/faltadirectorios
+timestamp="$(date +"%H_%M_%S_")"
+
+var=$((random%3))
+if [$var -eq o];then
+	touch $output_dir/${timestamp}_text.txt
+elif [$var -eq 1];then
+	touch $output_dir/${timestamp}_image.png
+else
+	touch $output_dir/${timestamp}_audio.wav
+fi
+
+hash=$(md5sum -quearch-|cut -d ' ' -f1)
+
+mv archivo ouput/$hash
+
+touch $output_dir/${timestamp}_audio.wav
+touch $output_dir/${timestamp}_image.png
+touch $output_dir/${timestamp}_text.txt
