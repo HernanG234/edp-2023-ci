@@ -1,15 +1,17 @@
 #!/bin/bash
 
-output_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/generador_archivos"
+tar_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/output"
 
-tar_dir "./tar"
-
-tar_file="output_files.tar"
-
-if [ -d "$output_dir" ]; then
-	mkdir -p "$tar_dir"
-	tar -cf "$tar_dir/$tar_file" -C "$output_dir"
-	echo "Archivo $tar_file generado correctamente en $tar_dir"
-else
-	echo "El directorio output no existe en la ubicacion especificada: $output_dir"
+tar_file="./tar_file"
+if [ ! -d "$tar_dir" ]; then
+    echo "El directorio $tar_dir no existe."
+    exit 1
 fi
+
+tar -cf "$tar_file.tar" -C "$tar_dir" .
+if [ $? -eq 0 ]; then
+    echo "Archivo output_files.tar generado correctamente en $tar_file"
+else
+    echo "Error al generar el archivo output_files.tar"
+fi
+

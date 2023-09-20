@@ -1,39 +1,50 @@
 #!/bin/bash
 
-download_dir="/home/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/temp"
+download_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/downloader/archivos_descargados"
+output_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/output"
 
-output_dir="/home/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/output"
+if [ ! -d "$output_dir" ]; then
+    mkdir -p "$output_dir"
+fi
 
-clasificador() {
-	local file="$1"
-	local file_type=$(file -b --mime-type "$file")
+img_counter=1
+snd_counter=1
+txt_counter=1
 
-	case "$file_type" in
-		"image/png")
-			category="img"
-			;;
-		"audio/wav")
-			category="snd"
-			;;
-		"text/plain")
-			category="txt"
-			;;
-		*)
-			echo "Archivo desconocido"
-			return
-			;;
-	esac
-	
-	local filename=$(basename "$file")
-	local new_file_name="${category}1.${file_name##*.}"
-	
-	mkdir -p "$output_dir/$category"
-	mv "$file" "$output_dir/$category/$new_file_name"
-
-	echo "Archivo clasificado y renombrado; $file_name > $new_file_name"
-}
 for file in "$download_dir"/*; do
-	if [ -f "$file" ]; then
-		clasificador "$file"
-	fi
+    if [ -f "$file" ]; then
+        file_type=$(file -b --mime-type "$file")
+        case "$file_type" in    
+            "image/png")
+                category="img"
+                ext=".png"
+                counter="$img_counter"
+                ((img_counter++))
+                ;;
+            "audio/wav")
+                category="snd"
+                ext=".wav"
+                counter="$snd_counter"
+                ((snd_counter++))
+                ;;
+            "text/plain")
+                category="txt"
+                ext=".txt"
+                counter="$txt_counter"
+                ((txt_counter++))
+                ;;
+            *)
+                category="unk"
+                ;;
+        esac
+
+        if [ "$category" != "unk" ]; then
+            filename=$(basename "$file")
+            new_filename="${category}${counter}${ext}"
+            mkdir -p "$output_dir/$category"    
+            mv "$file" "$output_dir/$category/$new_filename"
+   	        echo "Archivo clasificado y movido a la carpeta: $category: $new_filename"
+	    fi
+    fi
 done
+
