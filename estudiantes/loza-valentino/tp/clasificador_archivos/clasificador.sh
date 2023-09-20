@@ -6,7 +6,7 @@ output_dir="/home/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivo
 
 clasificador() {
 	local file="$1"
-	local file_type=$(file -b --mime-type "$file_name")
+	local file_type=$(file -b --mime-type "$file")
 
 	case "$file_type" in
 		"image/png")
@@ -32,7 +32,7 @@ clasificador() {
 
 	echo "Archivo clasificado y renombrado; $file_name > $new_file_name"
 }
-for file in "$local_download_dir"/*; do
+for file in "$download_dir"/*; do
 	if [ -f "$file" ]; then
 		clasificador "$file"
 	fi
