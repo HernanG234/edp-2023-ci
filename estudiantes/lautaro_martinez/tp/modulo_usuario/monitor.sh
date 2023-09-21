@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # Directorio de salida principal
-output_dir="/home/tuia/Escritorio/tp/outputs"
+output_dir="../outputs"
 
 # Función para generar el informe de monitoreo
 generar_informe() {

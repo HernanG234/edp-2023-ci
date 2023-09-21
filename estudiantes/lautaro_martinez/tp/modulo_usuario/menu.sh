@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "$(pwd)"
+
+cd modulo_usuario/
 # Menú principal
 while true; do
     echo "Menú Principal:"
@@ -12,7 +15,7 @@ while true; do
     case $opcion in
         1)
             # Ejecutar el script de Descargador (Downloader)
-            ./downloader.sh
+            ./descargador.sh
 
             # Ejecutar el script de Clasificador de Archivos (clasificador.sh)
             ./clasificador.sh
