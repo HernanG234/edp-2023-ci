@@ -27,3 +27,7 @@ for file in *; do
         cont_imagen=$((cont_imagen + 1))
     fi
 done
+
+cd ..
+
+tar -czvf outputs.tar.gz outputs/
