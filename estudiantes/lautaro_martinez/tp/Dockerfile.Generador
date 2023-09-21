@@ -1,0 +1,15 @@
+FROM debian:latest
+
+RUN apt-get update -y
+RUN apt-get install bash -y
+RUN apt-get install curl -y
+RUN apt-get install cron -y
+RUN apt-get install procps -y
+
+COPY . /tp
+
+WORKDIR /tp
+
+RUN ls /tp
+
+RUN echo "* * * * * /tp/modulo_generador/generador.sh" > /etc/cron.d/mycronjob
