@@ -6,7 +6,7 @@ archivos_desordenados=$(curl -l 'ftp://tuiaedpuser:tuiaedpuser@0.0.0.0' | sort -
 
 for file in ${archivos_desordenados}; do
 	curl -o $file 'ftp://tuiaedpuser:tuiaedpuser@0.0.0.0'/$file
-	echo "descargadando..."
+	echo "descargando..."
 	mv $file salida-random
 	
 done
