@@ -24,7 +24,7 @@ base64 /dev/urandom | head -c 500 > file.txt
 
 #### Sonidos:
 ```
-ffmpeg -f lavfi -i "sine=frequency=1000:duration=5" out.wav
+ffmpeg -f lavfi -i "anoisesrc=a=0.1:c=white:duration=5" out.wav
 ```
 
 #### Imágenes:
