@@ -1,5 +1,0 @@
-Informe de Monitoreo - 21_09_23:14_15_35
-Uso de CPU: 62,2%
-Uso de RAM: 1462 MB
-Número de procesos en ejecución: 209
-Espacio libre en el disco: 60%
