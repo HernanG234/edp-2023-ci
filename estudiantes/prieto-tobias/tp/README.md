@@ -14,3 +14,10 @@ Correr servidor ftp:
 
 Listar elementos del servidor:
 	curl -l ftp://tuiaedpuser:tuiaedpuser@0.0.0.0
+
+Crear la imagen del contenedor del usuario:
+	docker build -t img-usuario .
+
+
+Ejecutar el contenedor usuario:
+	docker run -it --network="host" img-usuario /bin/bash

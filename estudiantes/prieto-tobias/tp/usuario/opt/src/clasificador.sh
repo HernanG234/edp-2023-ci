@@ -21,10 +21,15 @@ for file in *; do
         mv "$file" "archivo-texto${cont_texto}.txt"
         mv "archivo-texto${cont_texto}.txt" "../outputs/texto"
         cont_texto=$((cont_texto + 1))
-    else
-        mv "$file" "archivo-imagen${cont_imagen}.png"
-        mv "archivo-imagen${cont_imagen}.png" "../outputs/imagen"
-        cont_imagen=$((cont_imagen + 1))
+    elif echo"$tipo_archivo" | grep -qE "JPEG" ; then
+	mv "$file" "archivo-imagen${cont_imagen}.png"
+	mv "archivo-imagen${cont_imagen}.png" "../outputs/imagen"
+
+
+   # else
+    #    mv "$file" "archivo-imagen${cont_imagen}.png"
+     #   mv "archivo-imagen${cont_imagen}.png" "../outputs/imagen"
+      #  cont_imagen=$((cont_imagen + 1))
     fi
 done
 

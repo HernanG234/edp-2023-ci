@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir salida-random
 echo "Ingrese la cantidad de archivos a descargar:"
 read cantidad
 
