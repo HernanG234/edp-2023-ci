@@ -4,26 +4,26 @@ archivos=$(ls -p ./outputs | grep -v /)  # ls - p muestra los directorios con el
 
 # CHEQUEAMOS SI EXISTE LA CARPETA DE IMAGENES
 
-if [ ! -d "./outputs/img" ]
+if [ ! -d "./files/img" ]
 then
 	echo "repositorio no existe, creado OK"
-	mkdir ./outputs/img
+	mkdir ./files/img
 fi
 
 # CHEQUEAMOS SI EXISTE EL DIRECTORIO DE SONIDOS
 
-if [ ! -d "./outputs/snd" ]
+if [ ! -d "./files/snd" ]
 then
 	echo "repositorio no existe, creado OK"
-	mkdir ./outputs/snd
+	mkdir ./files/snd
 fi
 
 # CHEQUEAMOS SI EXISTE EL DIRECTORIO DE TEXTO
 
-if [ ! -d "./outputs/txt" ]
+if [ ! -d "./files/txt" ]
 then
        	echo "repositorio no existe, creado OK"
-        mkdir ./outputs/txt
+        mkdir ./files/txt
 fi
 
 for archivo in $archivos;   # recorremos como un array la variable $archivos.
@@ -37,32 +37,26 @@ do
 	if [ $TipoWav -eq 1 ]
 	then
 		echo "es un archivo de audio! Moviendo a la carpeta de audios."
-		mv ./outputs/$archivo ./outputs/snd/$archivo
+		mv ./outputs/$archivo ./files/snd/$archivo
 	fi
 
 	if [ $TipoTxt -eq 1 ]
 #50
 	then
 		echo "es tipo de archivo de texto!Moviendo a la carpeta de textos."
-		mv ./outputs/$archivo ./outputs/txt/$archivo
+		mv ./outputs/$archivo ./files/txt/$archivo
 	fi
 
 	if [ $TipoPng -eq 1 ]
         then
                 echo "es tipo de archivo de imagen! Moviendo a la carpeta de imagenes."
-		mv ./outputs/$archivo ./outputs/img/$archivo
+		mv ./outputs/$archivo ./files/img/$archivo
 	else
 		echo "Es un archivo ejecutable"
 	fi
-	# echo $(file ./outputs/$archivo | grep -c ASCII.text$)
-	# echo $(file ./outputs/$archivo | grep -c ^RIFF)
 
 	echo "Siguiente archivo"
 	echo "--------------"
 done
 
-
-# RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 48000 Hz
-# ASCII text
-# PNG image data, 100 x 100, 16-bit/color RGB, non-interlaced
-# probando los tipos mathc  file ./outputs/* | grep -c "ASCII text executable"file ./outputs/* | grep -c "RIFF" file ./outputs/* | grep -c "PNG"
+# probando los tipos matchs  file ./outputs/* | grep -c "ASCII text executable"file ./outputs/* | grep -c "RIFF" file ./outputs/* | grep -c "PNG"
