@@ -1,30 +1,43 @@
 #!/bin/bash
 
 # Generamos un archivo texto
-base64 /dev/urandom | head -c 500 > file.txt
 
-NombreTxt=($(md5sum file.txt))
+SELECT=$(($RANDOM % 3 + 1))
 
-echo "texto generado"
+if [ $SELECT = 1 ]
+then
 
-mv file.txt $NombreTxt
+	base64 /dev/urandom | head -c 500 > file.txt
 
-# Generamos un archivo de audio
-ffmpeg -f lavfi -i "sine=frequency=1000:duration=5" out.wav
+	NombreTxt=($(md5sum file.txt)) # Obtenemos el hash de verificacion
 
-echo "audio generado"
+	echo "texto generado"
 
-NombreAudio=($(md5sum out.wav))
 
-mv out.wav $NombreAudio
+	mv file.txt ./outputs/$NombreTxt # Movemos el archivo y lo renombramos con su hash correspondiente.
 
-# Generamos un archivo de imagen
-convert -size 100x100 xc: +noise Random noise.png
 
-echo "imagen generada"
+elif [ $SELECT == 2 ]
+then
 
-NombreImagen=($(md5sum noise.png))
+	# Generamos un archivo de audio
+	ffmpeg -f lavfi -i "anoisesrc=a=0.1:c=white:duration=5" out.wav
 
-mv noise.png $NombreImagen
+	echo "audio generado"
 
-exit 0
+	NombreAudio=($(md5sum out.wav)) # Obtenemos el hash de verificacion
+
+	mv out.wav ./outputs/$NombreAudio # Movemos el archivo generado y lo renombramos con su hash correspondiente.
+
+else
+	# Generamos un archivo de imagen
+	convert -size 100x100 xc: +noise Random noise.png
+
+	echo "imagen generada"
+
+	NombreImagen=($(md5sum noise.png)) # obtenemos el hash de verificacion
+
+	mv noise.png ./outputs/$NombreImagen # Movemos el archivo generado y lo renombramos con su hash correspondiente.
+
+fi
+
