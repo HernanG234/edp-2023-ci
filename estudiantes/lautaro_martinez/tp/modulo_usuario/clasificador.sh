@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # Ruta completa del archivo recibido como argumento
 input_file="$1"
@@ -38,7 +38,7 @@ clasificar_y_mover() {
     echo "Archivo clasificado y movido a: $carpeta_destino/$nombre_destino"
 }
 
-# Clasificar el archivo según su tipo y moverlo al directorio correspondiente
+# Clasificar el archivo según su tipo y moverlo a la carpeta correspondiente
 case "$file_type" in
     "text/plain")
         clasificar_y_mover "txt"
@@ -54,4 +54,5 @@ case "$file_type" in
         exit 1
         ;;
 esac
+
 
