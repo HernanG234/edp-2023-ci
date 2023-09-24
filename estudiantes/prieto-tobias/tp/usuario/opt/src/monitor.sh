@@ -20,7 +20,7 @@ resultado=$((numero_de_procesos - 1))
 
     echo -e "\nEspacio libre en el disco:"
     df -h --output=pcent / | tail -1
-} > "$nombre_archivo"
+} | tee "$nombre_archivo"
 
 echo "Informe generado y guardado como $nombre_archivo"
 

@@ -11,4 +11,3 @@ for file in ${archivos_desordenados}; do
 	mv $file salida-random
 	
 done
-

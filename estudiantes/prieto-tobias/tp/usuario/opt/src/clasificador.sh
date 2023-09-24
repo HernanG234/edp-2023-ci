@@ -21,7 +21,7 @@ for file in *; do
         mv "$file" "archivo-texto${cont_texto}.txt"
         mv "archivo-texto${cont_texto}.txt" "../outputs/texto"
         cont_texto=$((cont_texto + 1))
-    elif echo"$tipo_archivo" | grep -qE "JPEG" ; then
+    elif echo "$tipo_archivo" | grep -qE "JPEG" ; then
 	mv "$file" "archivo-imagen${cont_imagen}.png"
 	mv "archivo-imagen${cont_imagen}.png" "../outputs/imagen"
 
@@ -36,3 +36,6 @@ done
 cd ..
 
 tar -czvf outputs.tar.gz outputs/
+
+#cd outputs/
+#rm -rf *

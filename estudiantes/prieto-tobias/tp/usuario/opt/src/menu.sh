@@ -10,9 +10,13 @@ while true;do
 		
 	case $opcion in 
 		1)
-			echo PROCESANDO ARCHIVOS  ;;
+			echo PROCESANDO ARCHIVOS
+			/opt/src/downloader.sh
+			/opt/src/clasificador.sh
+			echo   ;;
 		2)
-			echo OBTENIENDO INFORMACION DEL SISTEMA;;
+			echo OBTENIENDO INFORMACION DEL SISTEMA
+			/opt/src/monitor.sh;;
 		3)
 			exit 0
 			;;
