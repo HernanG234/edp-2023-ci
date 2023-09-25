@@ -15,7 +15,7 @@ Correr servidor ftp:
 Listar elementos del servidor:
 	curl -l ftp://tuiaedpuser:tuiaedpuser@0.0.0.0
 
-Crear la imagen del contenedor del usuario:
+Dirijirse a la carpeta usuario y en el nivel de jerarquia del Dockerfile crear la imagen del contenedor del usuario:
 	docker build -t img-usuario .
 
 
