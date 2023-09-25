@@ -20,4 +20,7 @@ Crear la imagen del contenedor del usuario:
 
 
 Ejecutar el contenedor usuario:
-	docker run -it --network="host" usuario-img /bin/bash
+	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/usuario/opt/src/salida_compresion/:/opt/src/salida_compresion --network="host" usr /bin/bash
+
+Descomprimir el archivo:
+	tar -xzvf outputs.tar.gz
