@@ -1,0 +1,70 @@
+#!/bin/bash
+
+output_dir=/tmp/output/clasificador
+
+mkdir -p $output_dir/empty/
+
+if [[ $# -lt 1 ]]; then
+	echo "argumentos inválidos"
+	exit 1
+fi
+
+input_dir="$1"
+vacio_count=0
+
+for arg in $(ls $input_dir); do
+	input_file="$input_dir/$arg"
+	format=$(file $input_file)
+	if [[ $format =~ empty ]]; then
+		cp $input_file $output_dir/empty/vacio_${vacio_count}.txt
+		echo "$input_file -> $output_dir/empty/vacio_$vacio_count.txt"
+		echo "$input_file está vacío"
+		vacio_count=$((vacio_count+1))
+	fi
+done
+
+
+----------------
+
+#!/bin/bash
+
+# Ruta al directorio donde se almacenan los archivos descargados
+DOWNLOAD_DIR="/ruta/al/directorio/de/descargas"
+
+# Declarar variables globales
+filename=""
+category=""
+target_dir=""
+
+# Función para clasificar un archivo
+classify_file() {
+    filename="$1"
+
+    if file -b --mime "$filename" | grep -q "text"; then
+        category="txt"
+    elif file -b --mime "$filename" | grep -q "audio"; then
+        category="snd"
+    elif file -b --mime "$filename" | grep -q "image"; then
+        category="img"
+    else
+        echo "Tipo de archivo desconocido: $filename"
+        return
+    fi
+
+    target_dir="$DOWNLOAD_DIR/$category"
+    mkdir -p "$target_dir"
+    mv "$filename" "$target_dir/"
+}
+
+# Comprobar si existen archivos en el directorio de descargas
+if [ -z "$(ls -A "$DOWNLOAD_DIR")" ]; then
+    echo "No hay archivos para clasificar en el directorio de descargas."
+else
+    # Clasificar archivos en el directorio de descargas
+    for file in "$DOWNLOAD_DIR"/*; do
+        if [ -f "$file" ]; then
+            classify_file "$file"
+        fi
+    done
+fi
+ 

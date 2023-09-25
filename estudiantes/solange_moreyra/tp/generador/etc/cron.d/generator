@@ -1,1 +1,1 @@
- 1 * * * * * /opt/src/cron-generator 10
+ * * * * * /opt/src/cron-generator 10

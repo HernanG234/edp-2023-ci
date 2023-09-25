@@ -1,63 +1,34 @@
 #!/bin/bash
 
-ouput_dir=/tmp/output
-timestamp="$(date +"%H_%M_%S_")"
-
-var=$((random%3))
-if [$var -eq o];then
-	touch $output_dir/${timestamp}_text.txt
-elif [$var -eq 1];then
-	touch $output_dir/${timestamp}_image.png
-else
-	touch $output_dir/${timestamp}_audio.wav
-fi
-
-hash=$(md5sum -quearch-|cut -d ' ' -f1)
-
-mv archivo ouput/$hash
-
-touch $output_dir/${timestamp}_audio.wav
-touch $output_dir/${timestamp}_image.png
-touch $output_dir/${timestamp}_text.txt
--------------------------------------------------------------------
-
-base64 /dev/urandom | head -c 500 > file.txt
-
-ffmpeg -f lavfi -i "anoisesrc=a=0.1:c=white:duration=5" out.wav
-
-convert -size 100x100 xc: +noise Random noise.png
---------------------------------------------------------------------
-#!/bin/bash
-
 # Ruta al directorio donde se almacenarán los archivos generados
 OUTPUT_DIR="/tmp/output"
 
 # Función para generar un archivo de texto aleatorio
 generate_text_file() {
-    local filename="$OUTPUT_DIR/text_$(date +%Y%m%d%H%M%S).txt"
+    filename="$OUTPUT_DIR/text_$(date +%Y_%m_%d-%H:%M:%S_).txt"
     base64 /dev/urandom | head -c 500 > "$filename"
     calculate_hash "$filename"
 }
 
 # Función para generar un archivo de sonido aleatorio
 generate_sound_file() {
-    local filename="$OUTPUT_DIR/sound_$(date +%Y%m%d%H%M%S).wav"
+    filename="$OUTPUT_DIR/sound_$(date +%Y_%m_%d-%H:%M:%S_).wav"
     ffmpeg -f lavfi -i "anoisesrc=a=0.1:c=white:duration=5" "$filename"
     calculate_hash "$filename"
 }
 
 # Función para generar una imagen aleatoria
 generate_image_file() {
-    local filename="$OUTPUT_DIR/image_$(date +%Y%m%d%H%M%S).png"
+    filename="$OUTPUT_DIR/image_$(date +%Y_%m_%d-%H:%M:%S_).png"
     convert -size 100x100 xc: +noise Random "$filename"
     calculate_hash "$filename"
 }
 
 # Función para calcular el hash de un archivo y renombrarlo
 calculate_hash() {
-    local filename="$1"
-    local hash=$(md5sum "$filename" | awk '{print $1}')
-    local new_filename="${filename%.*}_$hash.${filename##*.}"
+    filename="$1"
+    hash=$(md5sum "$filename" | awk '{print $1}')
+    new_filename="${filename%.*}_$hash.${filename##*.}"
     mv "$filename" "$new_filename"
 }
 
@@ -68,3 +39,4 @@ mkdir -p "$OUTPUT_DIR"
 generate_text_file
 generate_sound_file
 generate_image_file
+

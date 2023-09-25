@@ -6,7 +6,7 @@ RUN apt-get install -y ffmpeg
 RUN apt-get install -y imagemagick
 
 ADD ["etc/","/etc/"]
-ADD ["apt","/apt/"]
+ADD ["opt","/opt/"]
 
 RUN crontab /etc/cron.d/generador
 

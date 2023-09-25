@@ -1,1 +1,58 @@
+#!/bin/bash
+
+PS3="Elija>"
+echo "Elija operación a realizar sobre las imágenes: "
+select operacion in "Procesar Archivos" "Monitoreo del Sistema" "Salir"
+
+do
+	[ -e $operacion ] && echo "Elegir entre opcion valida!" && continue
+	[ $REPLY == 3 ] && echo "¡Hasta luego!" && break
+	echo "Opción Elegida: " $operacion
+	echo "__Ingrese Argumento__"
+	read RESP
+
+  	if [ $REPLY == 1 ]; then
+    		# Acción para la opción 1
+    		bash usuario/ $RESP
+ 	elif [ $REPLY == 2 ]; then
+    		# Acción para la opción 2
+    		bash generador/ $RESP
+  	else
+    		echo "Opción no válida. Por favor, elija 1 o 2."
+	fi
+
+done
+-------------------------
+#!/bin/bash
+
+while true; do
+    clear
+    echo "Menú Principal"
+    echo "1. Descargar archivos"
+    echo "2. Monitorear sistema"
+    echo "3. Salir"
+
+    read -p "Elija una opción (1/2/3): " choice
+
+    case $choice in
+        1)
+            # Llamar a la función de descarga de archivos
+            download_files "$output_dir" "$number"
+            ;;
+        2)
+            # Llamar a la función de monitoreo del sistema
+            monitor_system
+            ;;
+        3)
+            echo "Saliendo..."
+            exit
+            ;;
+        *)
+            echo "Opción inválida. Intente nuevamente."
+            ;;
+    esac
+
+    read -p "Presione Enter para continuar..."
+done
+
 
