@@ -20,4 +20,4 @@ Crear la imagen del contenedor del usuario:
 
 
 Ejecutar el contenedor usuario:
-	docker run -it --network="host" img-usuario /bin/bash
+	docker run -it --network="host" usuario-img /bin/bash

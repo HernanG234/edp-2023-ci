@@ -7,4 +7,6 @@ RUN apt-get install -y file
 RUN apt-get install -y nano
 RUN apt-get install -y tree
 ADD ["opt/","opt/"]
+WORKDIR /opt/src/
 
+ENTRYPOINT ["/opt/src/menu.sh"]

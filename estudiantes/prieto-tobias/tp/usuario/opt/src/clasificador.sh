@@ -5,6 +5,9 @@ mkdir -p outputs/texto
 mkdir -p outputs/sonido
 mkdir -p outputs/imagen
 
+cd outputs/
+rm -rf *
+cd ..
 cont_audio=1
 cont_imagen=1
 cont_texto=1
@@ -35,7 +38,5 @@ done
 
 cd ..
 
-tar -czvf outputs.tar.gz outputs/
+tar -czvf comprimido.tar.gz outputs/
 
-#cd outputs/
-#rm -rf *
