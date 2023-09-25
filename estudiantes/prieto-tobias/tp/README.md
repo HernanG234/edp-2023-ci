@@ -1,26 +1,45 @@
-Pasos a ejecutar:
+# TRABAJO PRACTICO ENTORNO DE PROGRAMACION (condicion intermedia)
 
-Crear una carpeta "output" preferentemente en el mismo nivel de jerarquia que el Dockerfile en caso de no existir
+En este repositorio se encuentra un proyecto realizado en lenguaje shell (Bash), el cual consiste de tres modulos que trabajan de forma conjunta para conseguir como resultado la descarga de un comprimido que contiene una serie de archivos de distinto tipo.
 
-Crear imagen:
+## MODULO 1: Generador de archivos
+
+Se ejecutaran una serie de scripts dentro de un contenedor de docker encargado de descargar una vez por minuto un archivo aleatorio de texto, audio o imagen y lo guardara con el nombre de su suma de verificacion.
+
+**Pasos a ejecutar:**
+
+En la jerarquia que se encuentra el primer Dockerfile ejecutar el siguiente comando para crear la imagen de Docker:
+
 	docker build -t img-contenedor .
 
-Correr imagen:
+Para correr la imagen previamente creada:
+
 	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/output:/tmp/output img-generador
 
-Correr servidor ftp: 
+## MODULO 2: Servidor FTP
+
+En este modulo lo que se obtendra es en base a los archivos generados previamente en el anterior contenedor, se los subira a un servidor ftp y se los enlistara para en el proximo contenedor ser accedidos, todo esto ejecutandose en un nuevo contenedor de Docker.
+
+Para ejecutar el servidor ftp correr el siguiente comando:
+
 	docker run -p 21:21 -p 21000-21010:21000-21010 -e USERS="tuiaedpuser|tuiaedpuser" -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/output:/ftp/tuiaedpuser delfer/alpine-ftp-server
 
+Para corroborar que este funcionando el servidor podemos ejecutar el comando curl y ver si los archivos se muestran correctamente:
 
-Listar elementos del servidor:
-	curl -l ftp://tuiaedpuser:tuiaedpuser@0.0.0.0
+    curl -l ftp://tuiaedpuser:tuiaedpuser@0.0.0.0
+	
+## MODULO 3: Interfaz de usuario
 
-Dirijirse a la carpeta usuario y en el nivel de jerarquia del Dockerfile crear la imagen del contenedor del usuario:
+Este ultimo contenedor lo que hara es en base a los archivos que estan subidos en el servidor, darle la opcion al usuario de elegir cuantos quiere descargar de forma aleatoria, tambien incluye la capacidad de obtener un breve monitoreo del sistema y comprimir toda esa informacion en un nuevo archivo comprimido que podra ser accedido desde fuera del contenedor.
+
+Para iniciar situarnos en el Dockerfile que se encuentra dentro de la carpeta usuario y ejecutar el comando para crear la imagen:
+
 	docker build -t img-usuario .
 
+Una vez creada la imagen ejecutemos el contenedor, tener en cuenta que se le tiene que pasar primero la ruta local (host) de la ubicacion de donde queremos que se guarde el archivo comprimido y seguido a ella, la ruta del contenedor donde se ubica este archivo de salida:
 
-Ejecutar el contenedor usuario:
 	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/usuario/opt/src/salida_compresion/:/opt/src/salida_compresion --network="host" usr /bin/bash
 
-Descomprimir el archivo:
+Una vez al haber terminado de ejecutar por completo las opciones del contenedor y salir al sistema local, si nos dirijimos a la carpeta de salida se encontrara el archivo comprimido generado por el contenedor, si queremos acceder a la informacion que contiene podemos ejecutar el siguiente comando:
+
 	tar -xzvf outputs.tar.gz
