@@ -2,6 +2,10 @@
 
 En este repositorio se encuentra un proyecto realizado en lenguaje shell (Bash), el cual consiste de tres modulos que trabajan de forma conjunta para conseguir como resultado la descarga de un comprimido que contiene una serie de archivos de distinto tipo.
 
+Para trabajar en la rama adecuada, ejecutar el siguiente comando:
+
+ 	git checkout -b prieto-tp origin/prieto-tp
+
 ## MODULO 1: Generador de archivos
 
 Se ejecutaran una serie de scripts dentro de un contenedor de docker encargado de descargar una vez por minuto un archivo aleatorio de texto, audio o imagen y lo guardara con el nombre de su suma de verificacion.
