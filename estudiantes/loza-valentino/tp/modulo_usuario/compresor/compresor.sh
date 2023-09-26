@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tar_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/output"
+tar_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/clasificador_archivos/output"
 
 tar_file="./tar_file"
 if [ ! -d "$tar_dir" ]; then

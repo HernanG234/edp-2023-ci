@@ -1,7 +1,7 @@
 #!/bin/bash
 
-download_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/downloader/archivos_descargados"
-output_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/output"
+download_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/downloader/archivos_descargados"
+output_dir="/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/clasificador_archivos/output"
 
 if [ ! -d "$output_dir" ]; then
     mkdir -p "$output_dir"

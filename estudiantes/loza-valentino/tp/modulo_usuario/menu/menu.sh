@@ -2,14 +2,14 @@
 
 procesar_archivos() {
 	echo "Procesando archivos"
-	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/generador_archivos/generador.sh
-	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/clasificador_archivos/clasificador.sh
-	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/compresor/compresor.sh
+	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_generador/generador_archivos/generador.sh
+	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/clasificador_archivos/clasificador.sh
+	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/compresor/compresor.sh
 }
 
 monitoreo_sistema() {
 	echo "Generando reporte del sistema"
-	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/monitor/monitor.sh
+	/home/valentino/edp-2023-ci/estudiantes/loza-valentino/tp/modulo_usuario/monitor/monitor.sh
 }
 
 while true; do

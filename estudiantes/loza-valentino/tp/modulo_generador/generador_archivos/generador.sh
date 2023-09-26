@@ -1,8 +1,9 @@
 #!/bin/bash
 
 random_number=$((1 + RANDOM % 3))
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 file_name="file_$(date '+%Y%m%d%H%M%S')."
-output="./output"
+output="$SCRIPT_DIR/output"
 mkdir -p "$output"
 case $random_number in
     1)
