@@ -16,11 +16,15 @@ Para correr la imagen previamente creada:
 
 	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/output:/tmp/output img-generador
 
+ Una vez que corramos este contenedor, en nuestra carpeta output se estara generando un archivo aleatorio de algunos de los tres tipos mencionados, para detener la generacion simplemente detener el contenedor con el comando:
+
+ 	docker stop $id-o-nombre-del-contenedor
+
 ## MODULO 2: Servidor FTP
 
-En este modulo lo que se obtendra es en base a los archivos generados previamente en el anterior contenedor, se los subira a un servidor ftp y se los enlistara para en el proximo contenedor ser accedidos, todo esto ejecutandose en un nuevo contenedor de Docker.
+Este modulo consiste en un servidor ftp que se estara ejecutando para mostrarnos los archivos descargados previamente en el anterior modulo, con la finalidad de poder ser accedidos nuevamente por el siguiente.
 
-Para ejecutar el servidor ftp correr el siguiente comando:
+Para pone en marcha el servidor ftp debemos correr el siguiente comando, prestando atencion a los volumenes a compartir, en este caso se comparte la carpeta output con la salida predeterminada del servidor:
 
 	docker run -p 21:21 -p 21000-21010:21000-21010 -e USERS="tuiaedpuser|tuiaedpuser" -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/output:/ftp/tuiaedpuser delfer/alpine-ftp-server
 
@@ -30,9 +34,9 @@ Para corroborar que este funcionando el servidor podemos ejecutar el comando cur
 	
 ## MODULO 3: Interfaz de usuario
 
-Este ultimo contenedor lo que hara es en base a los archivos que estan subidos en el servidor, darle la opcion al usuario de elegir cuantos quiere descargar de forma aleatoria, tambien incluye la capacidad de obtener un breve monitoreo del sistema y comprimir toda esa informacion en un nuevo archivo comprimido que podra ser accedido desde fuera del contenedor.
+Este ultimo contenedor lo que hara es en base a los archivos que estan subidos en el servidor, darle la opcion al usuario de elegir cuantos quiere descargar de forma aleatoria, tambien incluye la capacidad de obtener un breve monitoreo del sistema y recolectar toda esa informacion en un nuevo archivo comprimido que podra ser accedido desde fuera del contenedor.
 
-Para iniciar situarnos en el Dockerfile que se encuentra dentro de la carpeta usuario y ejecutar el comando para crear la imagen:
+Para iniciar debemos situarnos en el Dockerfile que se encuentra dentro de la carpeta usuario y ejecutar el comando para crear la imagen:
 
 	docker build -t img-usuario .
 
