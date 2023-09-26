@@ -17,8 +17,13 @@ while true; do
             # Ejecutar el script de Descargador (Downloader)
             ./descargador.sh
 
+            FILES=$(du -a ../outputs | egrep -oh "\.\./.*")
+
+            for file in $FILES
+            do
             # Ejecutar el script de Clasificador de Archivos (clasificador.sh)
-            ./clasificador.sh
+            ./clasificador.sh $file 
+            done
 
             # Ejecutar el script de Compresor (compresor.sh)
             ./compresor.sh

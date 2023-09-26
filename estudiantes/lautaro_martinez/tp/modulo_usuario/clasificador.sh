@@ -23,9 +23,6 @@ clasificar_y_mover() {
     tipo_archivo="$1"
     carpeta_destino="$output_dir/$tipo_archivo"
 
-    # Crear la carpeta de destino si no existe
-    mkdir -p "$carpeta_destino"
-
     # Contar la cantidad de archivos en la carpeta de destino
     contador=$(ls -1qA "$carpeta_destino" | wc -l)
     
@@ -41,13 +38,16 @@ clasificar_y_mover() {
 # Clasificar el archivo según su tipo y moverlo a la carpeta correspondiente
 case "$file_type" in
     "text/plain")
-        clasificar_y_mover "txt"
+        clasificar_y_mover "text"
         ;;
     "audio/wav")
-        clasificar_y_mover "snd"
+        clasificar_y_mover "audio"
+        ;;
+    "audio/x-wav")
+        clasificar_y_mover "audio"
         ;;
     "image/png")
-        clasificar_y_mover "img"
+        clasificar_y_mover "images"
         ;;
     *)
         echo "Tipo de archivo no reconocido: $file_type"
