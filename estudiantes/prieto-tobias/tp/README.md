@@ -14,7 +14,7 @@ Se ejecutaran una serie de scripts dentro de un contenedor de docker encargado d
 
 En la jerarquia que se encuentra el primer Dockerfile ejecutar el siguiente comando para crear la imagen de Docker:
 
-	docker build -t img-contenedor .
+	docker build -t img-generador .
 
 Para correr la imagen previamente creada:
 
@@ -46,7 +46,7 @@ Para iniciar debemos situarnos en el Dockerfile que se encuentra dentro de la ca
 
 Una vez creada la imagen ejecutemos el contenedor, tener en cuenta que se le tiene que pasar primero la ruta local (host) de la ubicacion de donde queremos que se guarde el archivo comprimido y seguido a ella, la ruta del contenedor donde se ubica este archivo de salida:
 
-	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/usuario/opt/src/salida_compresion/:/opt/src/salida_compresion --network="host" usr /bin/bash
+	docker run -it -v /home/tobias/edp-2023-ci/estudiantes/prieto-tobias/tp/usuario/opt/src/salida_compresion/:/opt/src/salida_compresion --network="host" img-usuario /bin/bash
 
 Una vez al haber terminado de ejecutar por completo las opciones del contenedor y salir al sistema local, si nos dirijimos a la carpeta de salida se encontrara el archivo comprimido generado por el contenedor, si queremos acceder a la informacion que contiene podemos ejecutar el siguiente comando:
 
