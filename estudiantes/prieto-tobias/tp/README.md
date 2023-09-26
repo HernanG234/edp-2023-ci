@@ -6,6 +6,12 @@ Para trabajar en la rama adecuada, ejecutar el siguiente comando:
 
  	git checkout -b prieto-tp origin/prieto-tp
 
+
+Antes de comenzar a ejecutar los contenedores, es necesario tener algunas carpetas de salidas creadas para su correcto funcionamiento, por eso debemos correr el siguiente script:
+	
+	bash carpetas-vacias.sh	
+
+
 ## MODULO 1: Generador de archivos
 
 Se ejecutaran una serie de scripts dentro de un contenedor de docker encargado de descargar una vez por minuto un archivo aleatorio de texto, audio o imagen y lo guardara con el nombre de su suma de verificacion.
