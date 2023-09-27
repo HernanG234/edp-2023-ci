@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Obtiene la ruta del directorio del script
+script_dir=$(dirname "$(realpath "$0")")
+
+fecha=$(date +"%d_%m_%y:%H_%M_%S")
+
+uso_cpu=$(top -b -n 1 | grep "%Cpu(s)" | awk '{print $2}' | awk -F. '{print $1}')
+uso_ram=$(free | awk '/Mem/ {printf "%.2f", $3/$2*100}')
+nro_procesos=$(ps aux --no-heading | wc -l)
+espacio_libre_disco=$(df -h --output=avail / | sed -n '2p')
+
+nombre_archivo="report_${fecha}.txt"
+ruta_archivo="$script_dir/$nombre_archivo"
+
+# Crear el contenido del reporte
+reporte="Informe del sistema\n"
+reporte+="Fecha y Hora: $fecha\n"
+reporte+="Uso de CPU: ${uso_cpu}%\n"
+reporte+="Uso de RAM: ${uso_ram}%\n"
+reporte+="Número de Procesos: ${nro_procesos}\n"
+reporte+="Espacio Libre en Disco: ${espacio_libre_disco}\n"
+
+# Guardar el reporte en el archivo
+echo -e "$reporte" > "$ruta_archivo"
+
+echo "Reporte generado y guardado en el archivo $ruta_archivo."

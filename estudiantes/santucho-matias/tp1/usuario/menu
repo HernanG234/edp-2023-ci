@@ -1,0 +1,42 @@
+#!/bin/bash
+
+mostrar_menu() {
+    echo "Menú de Usuario:"
+    echo "1. Generar archivos"
+    echo "2. Descargar archivos"
+    echo "3. Clasificar archivos"
+    echo "4. Comprimir archivos"
+    echo "5. Salir"
+    echo -n "Elija una opción: "
+}
+
+generar_archivos() {
+    /home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/generador/generador_archivos
+}
+
+descargar_archivos() {
+    ./downloader
+}
+
+clasificar_archivos() {
+    ./clasificador_archivos
+}
+
+comprimir_archivos() {
+    ./compresor
+}
+
+#Ciclo para mostrar el menú y obtener la elección del usuario
+while true; do
+    mostrar_menu
+
+    read opcion
+    case $opcion in
+        1) generar_archivos ;;
+        2) descargar_archivos ;;
+        3) clasificar_archivos ;;
+        4) comprimir_archivos ;;
+        5) exit ;;
+        *) echo "Opción no válida. Por favor, intente nuevamente." ;;
+    esac
+done
