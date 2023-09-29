@@ -2,7 +2,7 @@
 
 mostrar_menu() {
     echo "Menú de Usuario:"
-    echo "1. Generar archivos"
+    echo "1. Monitor de sistema"
     echo "2. Descargar archivos"
     echo "3. Clasificar archivos"
     echo "4. Comprimir archivos"
@@ -10,8 +10,8 @@ mostrar_menu() {
     echo -n "Elija una opción: "
 }
 
-generar_archivos() {
-    /home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/generador/generador_archivos
+monitor() {
+    ./monitor
 }
 
 descargar_archivos() {
@@ -32,7 +32,7 @@ while true; do
 
     read opcion
     case $opcion in
-        1) generar_archivos ;;
+        1) monitor ;;
         2) descargar_archivos ;;
         3) clasificar_archivos ;;
         4) comprimir_archivos ;;

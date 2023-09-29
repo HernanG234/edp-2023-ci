@@ -1,32 +1,32 @@
 #!/bin/bash
+rm -rf outputs_clasificador/*
 
-script_dir="$(dirname "$0")"
-output_dir="/home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/generador/outputs_generador"
-txt_count=0
-snd_count=0
-img_count=0
+mkdir -p outputs_clasificador/txt
+mkdir -p outputs_clasificador/img
+mkdir -p outputs_clasificador/snd
 
-for file in ${output_dir} *; do
-    if [[ -f "$file" ]]; then
-        file_type=$(file -b --mime-type "$file")
-	echo $file_type
 
-        case "$file_type" in
-            "text/plain")
-                txt_count=$((txt_count+1)) 
-                mv "$file" "txt${txt_count}"
-                mv "txt${txt_count}" "/home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/usuario/outputs_clasificador/txt/"
-                ;;
-            "audio/x-wav")
-                snd_count=$((snd_count+1))
-                mv "$file" "wav${snd_count+1}"
-                mv "wav${snd_count+1}" "/home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/usuario/outputs_clasificador/snd/"
-                ;;
-            "image/png" | "image/jpeg")
-                img_count=$((img_count+1))
-                mv "$file" "png${img_count}"
-                mv "png${img_count}" "/home/matias/edp-2023-ci/estudiantes/santucho-matias/tp1/usuario/outputs_clasificador/img"
-                ;;
-        esac
+cont_audio=1
+cont_imagen=1
+cont_texto=1
+
+cd descargas
+
+for file in *; do
+    tipo_archivo=$(file "$file")
+
+    if echo "$tipo_archivo" | grep -qE "RIFF|audio"; then
+        mv "$file" "sonido${cont_audio}.wav"
+        mv "sonido${cont_audio}.wav" "../outputs_clasificador/snd"
+        cont_audio=$((cont_audio + 1))
+    elif echo "$tipo_archivo" | grep -qE "ASCII"; then
+        mv "$file" "texto${cont_texto}.txt"
+        mv "texto${cont_texto}.txt" "../outputs_clasificador/txt"
+        cont_texto=$((cont_texto + 1))
+    elif echo "$tipo_archivo" | grep -qE "PNG"; then
+        mv "$file" "imagen${cont_imagen}.png"
+        mv "imagen${cont_imagen}.png" "../outputs_clasificador/img"
+        cont_imagen=$((cont_imagen + 1))
+
     fi
 done

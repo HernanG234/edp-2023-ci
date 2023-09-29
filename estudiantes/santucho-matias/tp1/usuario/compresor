@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Definir el nombre del archivo comprimido
 FECHA=$(date +"%d_%m_%Y_%H_%M_%S")
-NOMBRE_ARCHIVO="outputs_clasificador$FECHA.tar"
+NOMBRE_ARCHIVO="./outputs/outputs_clasificador_$FECHA.tar"
 
-# Crear el archivo comprimido
-tar -cvf "$NOMBRE_ARCHIVO" outputs_clasificador/
+tar -cvf "$NOMBRE_ARCHIVO" -C "$(dirname "$0")" outputs_clasificador/
 
-echo "Archivo comprimido creado: $NOMBRE_ARCHIVO"
+echo "Archivo comprimido creado"
