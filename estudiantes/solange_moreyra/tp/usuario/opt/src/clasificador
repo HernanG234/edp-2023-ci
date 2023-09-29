@@ -1,40 +1,15 @@
 #!/bin/bash
 
-output_dir=/tmp/output/clasificador
-
-mkdir -p $output_dir/empty/
-
-if [[ $# -lt 1 ]]; then
-	echo "argumentos inválidos"
-	exit 1
-fi
-
+# Definir la ruta al directorio de entrada y al directorio de descarga
 input_dir="$1"
-vacio_count=0
+download_dir="/tmp/outputs/descargas"
+output_dir="/tmp/outputs/clasificador"
 
-for arg in $(ls $input_dir); do
-	input_file="$input_dir/$arg"
-	format=$(file $input_file)
-	if [[ $format =~ empty ]]; then
-		cp $input_file $output_dir/empty/vacio_${vacio_count}.txt
-		echo "$input_file -> $output_dir/empty/vacio_$vacio_count.txt"
-		echo "$input_file está vacío"
-		vacio_count=$((vacio_count+1))
-	fi
-done
-
-
-----------------
-
-#!/bin/bash
-
-# Ruta al directorio donde se almacenan los archivos descargados
-DOWNLOAD_DIR="/ruta/al/directorio/de/descargas"
-
-# Declarar variables globales
-filename=""
-category=""
-target_dir=""
+# Crear el directorio de salida y los subdirectorios necesarios
+mkdir -p "$output_dir/empty"
+mkdir -p "$download_dir/txt"
+mkdir -p "$download_dir/snd"
+mkdir -p "$download_dir/img"
 
 # Función para clasificar un archivo
 classify_file() {
@@ -46,25 +21,31 @@ classify_file() {
         category="snd"
     elif file -b --mime "$filename" | grep -q "image"; then
         category="img"
+    elif [ -s "$filename" ]; then
+        # Si no se reconoce el tipo, pero el archivo no está vacío, moverlo a otro directorio
+        category="otros"
     else
-        echo "Tipo de archivo desconocido: $filename"
-        return
+        # Si el archivo está vacío, moverlo a la carpeta "empty"
+        category="empty"
     fi
 
-    target_dir="$DOWNLOAD_DIR/$category"
+    target_dir="$download_dir/$category"
     mkdir -p "$target_dir"
     mv "$filename" "$target_dir/"
 }
 
-# Comprobar si existen archivos en el directorio de descargas
-if [ -z "$(ls -A "$DOWNLOAD_DIR")" ]; then
-    echo "No hay archivos para clasificar en el directorio de descargas."
+# Comprobar si existen archivos en el directorio de entrada
+if [ -z "$(ls -A "$input_dir")" ]; then
+    echo "No hay archivos para procesar en el directorio de entrada."
 else
-    # Clasificar archivos en el directorio de descargas
-    for file in "$DOWNLOAD_DIR"/*; do
+    # Procesar archivos en el directorio de entrada
+    for file in "$input_dir"/*; do
         if [ -f "$file" ]; then
             classify_file "$file"
         fi
     done
 fi
- 
+
+# Contar y mostrar cuántos archivos vacíos se movieron
+empty_count=$(find "$output_dir/empty" -type f | wc -l)
+echo "Se movieron $empty_count archivos vacíos a $output_dir/empty."
