@@ -1,0 +1,5 @@
+Informe de Monitoreo - 04_10_23:15_44_15
+Uso de CPU: 19,4%
+Uso de RAM: 2210 MB
+Número de procesos en ejecución: 250
+Espacio libre en el disco: 87%

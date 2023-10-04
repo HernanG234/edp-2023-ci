@@ -2,53 +2,55 @@
 
 read -p "Ingresa un número > " num_files
 
-ftp_server="localhost"
+# Se usa localhost en caso de correr el script de forma local   
+#ftp_server="localhost"
+ftp_server="ftp"
 ftp_user="tuiaedpuser"
 ftp_password="tuiaedpuser"
 
-# Connect to the FTP server and list files
-file_list=$(curl -s "ftp://$ftp_server" --user "$ftp_user:$ftp_password")
-echo "filelist >> $file_list"
-# Check if the FTP connection was successful
-if [ $? -ne 0 ]; then
-    echo "Error: Unable to connect to the FTP server."
+local_temp="temp"
+
+wget -r --ftp-user="$ftp_user" --ftp-password="$ftp_password" "ftp://$ftp_server" -P "$local_temp"
+
+if [ $? -eq 0 ]; then
+    echo "Descarga completada correctamente."
+else
+    echo "Error en la descarga."
     exit 1
 fi
 
-# Convert the file list to an array
-IFS=$'\n' read -d '' -r -a files <<< "$file_list"
+archivos="$(du -a $local_temp | egrep -oh "[a-z]*\/.*\.[a-z]*")"
+mi_array=($(echo $archivos | tr ";" " "))
 
-# Get the total number of files
-total_files="${#files[@]}"
+longitud=${#mi_array[@]}
+echo "Hay: $longitud archivos en el servidor"
 
-# Check if there are enough files to download
-if [ "$total_files" -lt "$num_files" ]; then
-    echo "Error: There are only $total_files files available on the FTP server."
-    exit 1
-fi
+elementos_seleccionados=()
 
-# Initialize an array to store indices of selected files
-selected_indices=()
+for ((i = 0; i < $num_files; i++)); do
+    indice_aleatorio=$(( RANDOM % $longitud ))
+    elemento_aleatorio=${mi_array[$indice_aleatorio]}
+    elementos_seleccionados+=($elemento_aleatorio)
+    
+    longitud=$((longitud - 1))
+done
 
-# Generate unique random indices until reaching the desired number
-while [ "${#selected_indices[@]}" -lt "$num_files" ]; do
-    # Generate a random index within the range of available files
-    random_index=$((RANDOM % total_files))
+longitud=${#elementos_seleccionados[@]}
 
-    # Check if the index is unique (not already selected)
-    if ! [[ " ${selected_indices[@]} " =~ " $random_index " ]]; then
-        selected_indices+=("$random_index")
+carpeta_dest="outputs"
+for ((i = 0; i < $longitud; i++)); do
+    elemento=${elementos_seleccionados[$i]}
+    extension=$(echo $elemento | egrep -oh "\..*") 
+    if [ "$extension" == ".txt" ] 
+    then 
+        cp $elemento "$carpeta_dest/text/"
+    elif [ "$extension" == ".wav" ] 
+    then
+        cp $elemento "$carpeta_dest/audio/"
+    elif [ "$extension" == ".png" ] 
+    then
+        cp $elemento "$carpeta_dest/images/"
     fi
 done
 
-# Download the specified number of random files
-for index in "${selected_indices[@]}"; do
-    file_to_download="${files[$index]}"
-    # Remove leading whitespace and store the filename
-    filename="${file_to_download##*[[:space:]]}"
-    echo "Descargando: $file_to_download"
-    echo $filename
-    curl -C - -o "outputs/$filename" -s "ftp://$ftp_server/$filename" --user "$ftp_user:$ftp_password"
-done
-
-echo "Downloaded $num_files random files from the FTP server."
+#rm -rf "temp"

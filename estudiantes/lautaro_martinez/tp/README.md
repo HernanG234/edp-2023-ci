@@ -2,6 +2,11 @@
 
 ## Correr servidor FTP
 ```
+docker network create mi_network
+```
+
+## Correr servidor FTP
+```
 docker run -d -p 21:21 -p 21000-21010:21000-21010 -e USERS="tuiaedpuser|tuiaedpuser" -v /home/tuia/Documentos/GitHub/edp-2023-ci/estudiantes/lautaro_martinez/tp/outputs#:/ftp/tuiaedpuser --name=ftp delfer/alpine-ftp-server
 ```
 
@@ -14,7 +19,7 @@ docker build -t tp -f Dockerfile.Tp .
 ## Correr imagen (Docker menú)
 
 ```
-docker run -it tp
+docker run -it --name tp tp
 ```
 
 ## Construir imagen (Docker generador)

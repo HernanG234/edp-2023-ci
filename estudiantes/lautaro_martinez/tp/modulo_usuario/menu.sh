@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "$(pwd)"
-
-# cd /tp/modulo_usuario/
 # Menú principal
 while true; do
     echo "Menú Principal:"
@@ -17,18 +14,16 @@ while true; do
             # Ejecutar el script de Descargador (Downloader)
             ./modulo_usuario/descargador.sh
 
-            FILES=$(du -a outputs/ | egrep -oh "/.*")
+            FILES=$(du -a outputs/ | egrep -oh "[a-z]*\/.*\.[a-z]*")
             
 	        for file in $FILES
 	        do
             # Ejecutar el script de Clasificador de Archivos (clasificador.sh)
-            ./modulo_usuario/clasificador.sh "outputs/$file" 
+            ./modulo_usuario/clasificador.sh "$file" 
             done
 
             # Ejecutar el script de Compresor (compresor.sh)
-            #./modulo_usuario/compresor.sh
-
-	        cd ..
+            ./modulo_usuario/compresor.sh
             ;;
         2)
             echo "Generando informe de monitoreo del sistema..."
