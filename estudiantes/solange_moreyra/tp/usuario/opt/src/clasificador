@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Definir la ruta al directorio de entrada y al directorio de descarga
-input_dir="$1"
-download_dir="/tmp/outputs/descargas"
-output_dir="/tmp/outputs/clasificador"
+input_dir="../tmp/outputs/descarga"
+download_dir="../tmp/outputs/descargas"
+output_dir="../tmp/outputs/clasificador"
 
 # Crear el directorio de salida y los subdirectorios necesarios
 mkdir -p "$output_dir/empty"

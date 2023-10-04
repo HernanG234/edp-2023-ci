@@ -11,7 +11,7 @@ download_files() {
     fi
 
     # Directorio de salida y cantidad de archivos a descargar
-    output_dir="/tmp/outputs/descarga"
+    output_dir="../tmp/outputs/descarga"
     number="$2"
 
     echo "Directorio de salida: $output_dir"
@@ -34,4 +34,4 @@ download_files() {
 }
 
 # Llamar a la función para descargar archivos
-download_files $output_dir "$2"
+download_files "$output_dir" "$2"

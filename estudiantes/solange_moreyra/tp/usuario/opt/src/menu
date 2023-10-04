@@ -7,20 +7,30 @@ while true; do
     echo "2. Monitorear sistema"
     echo "3. Salir"
 
-    read -p "Elija una opción (1/2/3): " choice
+    read -p "Elija una opción (1/2/3): " opcion
     
-    dir_rastreo=$(dirname "$0")
+    #dir_rastreo=$(dirname "$0")
 
-    case $choice in
+    case $opcion in
         1)
             # Llamar a la función de descarga de archivos
-            bash "$dir_rastreo/descarga"
-	    bash "$dir_rastreo/clasificador"
-	    bash "$dir_rastreo/compressor"
+            read -p "Ingrese la cantidad de archivos aleatorios a descargar: " arg
+	    bash "./descarga" . $arg
+	    bash "./clasificador"
+	    bash "./compressor"
+	    echo "Listo"
             ;;
         2)
             # Llamar a la función de monitoreo del sistema
-            bash "$dir_rastreo/monitoreo"
+            bash "./monitoreo"
+	    echo "Salida de último reporte:"
+	    ruta="../tmp/outputs"
+	    archivo=$(ls -t "$ruta" | head -n 1)
+	    if [ -n "$archivo" ]; then
+		    cat "$ruta/$archivo"
+	    else
+		echo "no se ha encontrado archivo"
+	    fi
             ;;
         3)
             echo "Saliendo..."

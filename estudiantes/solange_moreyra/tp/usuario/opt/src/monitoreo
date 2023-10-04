@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Ruta al directorio donde se almacenarán los informes
-REPORT_DIR="/tmp/outputs"
+
+REPORT_DIR="../tmp/outputs"
 
 # Función para recopilar información del sistema y guardarla en un archivo
 monitor_system() {
     timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-    report_file="$REPORT_DIR/report_$(date "+%Y%m%d%H%M%S").txt"
+    report_file="$REPORT_DIR/report_$(date "+%Y-%m-%d_%H:%M:%S").txt"
     
     # Recopilar información del sistema
     cpu_usage=$(top -bn 1 | awk '/%Cpu/{print $2}')
@@ -27,4 +28,4 @@ mkdir -p "$REPORT_DIR"
 
 # Llamar a la función para recopilar información y guardarla en el informe
 monitor_system
-
+echo "Monitoreado."

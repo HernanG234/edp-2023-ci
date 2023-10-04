@@ -8,6 +8,6 @@ RUN apt-get install -y imagemagick
 ADD ["etc/","/etc/"]
 ADD ["opt","/opt/"]
 
-RUN crontab /etc/cron.d/generador
+RUN crontab /etc/cron.d/generator
 
 ENTRYPOINT ["cron", "-f"]
