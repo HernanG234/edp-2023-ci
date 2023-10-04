@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Directorio de salida
-IMAGE_DIR="../outputs/images"
-TEXT_DIR="../outputs/text"
-AUDIO_DIR="../outputs/audio"
+IMAGE_DIR="outputs/images"
+TEXT_DIR="outputs/text"
+AUDIO_DIR="outputs/audio"
 
 
 # Verificar si la carpeta de salida existe, si no, crearla

@@ -16,7 +16,7 @@ file_type=$(file -b --mime-type "$input_file")
 extension="${input_file##*.}"
 
 # Directorio de salida principal
-output_dir="../outputs"
+output_dir="outputs"
 
 # Función para clasificar y mover el archivo
 clasificar_y_mover() {

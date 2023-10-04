@@ -2,7 +2,7 @@
 
 echo "$(pwd)"
 
-cd modulo_usuario/
+# cd /tp/modulo_usuario/
 # Menú principal
 while true; do
     echo "Menú Principal:"
@@ -15,23 +15,25 @@ while true; do
     case $opcion in
         1)
             # Ejecutar el script de Descargador (Downloader)
-            ./descargador.sh
+            ./modulo_usuario/descargador.sh
 
-            FILES=$(du -a ../outputs | egrep -oh "\.\./.*")
-
-            for file in $FILES
-            do
+            FILES=$(du -a outputs/ | egrep -oh "/.*")
+            
+	        for file in $FILES
+	        do
             # Ejecutar el script de Clasificador de Archivos (clasificador.sh)
-            ./clasificador.sh $file 
+            ./modulo_usuario/clasificador.sh "outputs/$file" 
             done
 
             # Ejecutar el script de Compresor (compresor.sh)
-            ./compresor.sh
+            #./modulo_usuario/compresor.sh
+
+	        cd ..
             ;;
         2)
             echo "Generando informe de monitoreo del sistema..."
             # Ejecutar el script de Monitoreo del Sistema (monitor.sh)
-            ./monitor.sh
+            ./modulo_usuario/monitor.sh
             echo "Informe de monitoreo del sistema generado."
             ;;
         3)

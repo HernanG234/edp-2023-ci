@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # Directorio de salida principal
-output_dir="../outputs"
+output_dir="outputs"
 
 # Nombre del archivo tar
 tar_file="$output_dir.tar"

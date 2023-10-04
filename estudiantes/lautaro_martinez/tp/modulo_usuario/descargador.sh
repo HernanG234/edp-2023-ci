@@ -48,7 +48,7 @@ for index in "${selected_indices[@]}"; do
     filename="${file_to_download##*[[:space:]]}"
     echo "Descargando: $file_to_download"
     echo $filename
-    curl -C - -o "./$filename" -s "ftp://$ftp_server/$filename" --user "$ftp_user:$ftp_password"
+    curl -C - -o "outputs/$filename" -s "ftp://$ftp_server/$filename" --user "$ftp_user:$ftp_password"
 done
 
 echo "Downloaded $num_files random files from the FTP server."
