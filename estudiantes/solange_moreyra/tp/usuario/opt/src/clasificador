@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Definir la ruta al directorio de entrada y al directorio de descarga
-input_dir="../tmp/outputs/descarga"
+input_dir="/tmp/outputs/"
 download_dir="../tmp/outputs/descargas"
 output_dir="../tmp/outputs/clasificador"
 
@@ -45,7 +45,7 @@ else
         fi
     done
 fi
-
+echo "Listo."
 # Contar y mostrar cuántos archivos vacíos se movieron
 empty_count=$(find "$output_dir/empty" -type f | wc -l)
 echo "Se movieron $empty_count archivos vacíos a $output_dir/empty."

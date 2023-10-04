@@ -9,8 +9,6 @@ while true; do
 
     read -p "Elija una opción (1/2/3): " opcion
     
-    #dir_rastreo=$(dirname "$0")
-
     case $opcion in
         1)
             # Llamar a la función de descarga de archivos

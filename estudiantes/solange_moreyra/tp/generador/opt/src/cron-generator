@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ruta al directorio donde se almacenarán los archivos generados
-OUTPUT_DIR="/tmp/output"
+OUTPUT_DIR="/tmp/outputs"
 
 # Función para generar un archivo de texto aleatorio
 generate_text_file() {
