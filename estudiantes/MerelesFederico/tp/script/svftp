@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Iniciamos el dowloader del de archivos.
+
+echo "iniciando el servidor ftp" 
+
+docker run -d -p 21:21 -p 21000-21010:21000-21010 --name servidor-ftp -e USERS="$USER|$USER" -v "$(pwd)/outputs/:/ftp/$USER" delfer/alpine-ftp-server
+
