@@ -1,8 +1,13 @@
 FROM ubuntu
 
-RUN apt update -y
+RUN apt-get update -y
+RUN apt-get install -y curl
+RUN apt-get install -y file
 
-ADD ["./menu","/opt/src/menu"]
 
-ENTRYPOINT ["cron"]
+ADD ["./opt/","/opt/"]
+
+WORKDIR "/opt/src"
+
+ENTRYPOINT ["./menu"]
 

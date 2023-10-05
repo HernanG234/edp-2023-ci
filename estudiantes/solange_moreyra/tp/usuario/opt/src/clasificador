@@ -1,15 +1,14 @@
 #!/bin/bash
 
 # Definir la ruta al directorio de entrada y al directorio de descarga
-input_dir="/tmp/outputs/"
-download_dir="../tmp/outputs/descargas"
+input_dir="../tmp/outputs/descarga"
 output_dir="../tmp/outputs/clasificador"
 
 # Crear el directorio de salida y los subdirectorios necesarios
 mkdir -p "$output_dir/empty"
-mkdir -p "$download_dir/txt"
-mkdir -p "$download_dir/snd"
-mkdir -p "$download_dir/img"
+mkdir -p "$output_dir/txt"
+mkdir -p "$output_dir/snd"
+mkdir -p "$output_dir/img"
 
 # Función para clasificar un archivo
 classify_file() {
@@ -29,7 +28,7 @@ classify_file() {
         category="empty"
     fi
 
-    target_dir="$download_dir/$category"
+    target_dir="$output_dir/$category"
     mkdir -p "$target_dir"
     mv "$filename" "$target_dir/"
 }
