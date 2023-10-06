@@ -1,0 +1,16 @@
+#!/bin/bash
+
+mkdir carpetacontenida
+cd carpetacontenida/
+mkdir dir.a
+cd dir.a
+mkdir dir.b
+cd ..
+mkdir -p dir.a/dir.c
+
+touch dir.a/dir.b/file.a
+touch dir.a/dir.b/file.b
+
+ln -s ../dir.b/file.a dir.a/dir.c/link.a
+
+tree 

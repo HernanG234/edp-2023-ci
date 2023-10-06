@@ -1,0 +1,43 @@
+#!/bin/bash
+
+while true; do
+    clear
+    echo "Menú Principal"
+    echo "1. Descargar, clasificar y comprimir archivos"
+    echo "2. Monitorear sistema"
+    echo "3. Salir"
+
+    read -p "Elija una opción (1/2/3): " opcion
+    
+    case $opcion in
+        1)
+            # Llamar a la función de descarga de archivos
+            read -p "Ingrese la cantidad de archivos aleatorios a descargar: " arg
+	    bash "./descarga" . $arg
+	    bash "./clasificador"
+	    bash "./compressor"
+	    echo "Listo"
+            ;;
+        2)
+            # Llamar a la función de monitoreo del sistema
+            bash "./monitoreo"
+	    echo "Salida de último reporte:"
+	    ruta="../tmp/outputs"
+	    archivo=$(ls -t "$ruta" | head -n 1)
+	    if [ -n "$archivo" ]; then
+		    cat "$ruta/$archivo"
+	    else
+		echo "no se ha encontrado archivo"
+	    fi
+            ;;
+        3)
+            echo "Saliendo..."
+            exit
+            ;;
+        *)
+            echo "Opción inválida. Intente nuevamente."
+            ;;
+    esac
+
+    read -p "Presione Enter para continuar..."
+done
