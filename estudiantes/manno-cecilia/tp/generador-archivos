@@ -1,0 +1,24 @@
+#!/bin/bash
+echo "que tipo de archivo desea generar?(texto/audio/imagen)"
+read RESP
+
+case $RESP in
+	[Tt][Ee][Xx][Tt][Oo])
+      		base64 /dev/urandom | head -c 500 > file.txt
+		echo "se ha creado un texto aleatorio"
+		;;
+	[Aa][Uu][Dd][Ii][Oo])
+		ffmpeg -f lavfi -i "sine=frequency=1000:duration=5" out.wav
+		echo "se ha creado un audio aleatorio"
+		;;
+	[Ii][Mm][Aa][Gg][Ee][Nn])
+		convert -size 100x100 xc: +noise Random noise.png
+		echo "se ha creado una imagen aleatoria"
+		;;
+	*)
+		echo "tipo de archivo no disponible"
+		;;
+esac
+
+#se puede armar por funciones para poder usar mas facil el que tiene cronometro
+
