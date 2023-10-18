@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# Obtener la ruta del script actual
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 # Directorio de salida
-IMAGE_DIR="$script_dir/../outputs/images"
-TEXT_DIR="$script_dir/../outputs/text"
-AUDIO_DIR="$script_dir/../outputs/audio"
+IMAGE_DIR="outputs/images"
+TEXT_DIR="outputs/text"
+AUDIO_DIR="outputs/audio"
+
 
 # Verificar si la carpeta de salida existe, si no, crearla
 if [ ! -d "$IMAGE_DIR" ]; then
@@ -59,4 +57,3 @@ case $file_type in
         exit 1
         ;;
 esac
-

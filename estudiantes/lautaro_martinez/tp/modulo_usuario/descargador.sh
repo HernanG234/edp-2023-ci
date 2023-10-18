@@ -52,5 +52,3 @@ for ((i = 0; i < $longitud; i++)); do
         cp $elemento "$carpeta_dest/images/"
     fi
 done
-
-#rm -rf "temp"

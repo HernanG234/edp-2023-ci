@@ -1,7 +1,17 @@
-#!/bin/bash
+# !/bin/bash
 
-# Ruta relativa al directorio del script
-base_dir=".."
+# Directorio de salida principal
+output_dir="/tp/output_file.tar"
+compress_dir="/tp/outputs"
 
-# Comprimir la carpeta outputs en un archivo outputs.tar
-tar -cvf "$base_dir/outputs.tar" -C "$base_dir" outputs
+
+# Comprobar si el directorio 'outputs' existe
+if [ ! -d "$compress_dir" ]; then
+    echo "El directorio $compress_dir no existe. Asegúrate de clasificar archivos antes de comprimirlos."
+    exit 1
+fi
+
+# Comprimir el directorio 'outputs' en un archivo .tar
+tar -cvf "$output_dir" -C "$compress_dir" .
+
+echo "Directorio 'outputs' comprimido a $tar_file en $output_dir"

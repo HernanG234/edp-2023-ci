@@ -1,10 +1,7 @@
-#!/bin/bash
-
-# Obtener la ruta del script actual
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# !/bin/bash
 
 # Directorio de salida principal
-output_dir="$script_dir/../outputs"
+output_dir="/tp/outputs"
 
 # Función para generar el informe de monitoreo
 generar_informe() {
@@ -14,29 +11,17 @@ generar_informe() {
     # Ruta completa del archivo de informe
     report_file="$output_dir/report_$timestamp.txt"
 
-    # Manejo de errores para obtener el uso de CPU
-    if ! cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}'); then
-        echo "Error al obtener el uso de CPU." >&2
-        exit 1
-    fi
+    # Obtener el uso de CPU
+    cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}')
 
-    # Manejo de errores para obtener el uso de RAM
-    if ! ram_usage=$(free -m | awk '/Mem/ {print $3}'); then
-        echo "Error al obtener el uso de RAM." >&2
-        exit 1
-    fi
+    # Obtener el uso de RAM
+    ram_usage=$(free -m | awk '/Mem/ {print $3}')
 
-    # Manejo de errores para obtener el número de procesos en ejecución
-    if ! process_count=$(ps aux | wc -l); then
-        echo "Error al obtener el número de procesos en ejecución." >&2
-        exit 1
-    fi
+    # Obtener el número de procesos en ejecución
+    process_count=$(ps aux | wc -l)
 
-    # Manejo de errores para obtener el espacio libre en disco en porcentaje
-    if ! disk_usage=$(df -h / | awk '/\// {print $5}'); then
-        echo "Error al obtener el espacio libre en disco." >&2
-        exit 1
-    fi
+    # Obtener el espacio libre en disco en porcentaje
+    disk_usage=$(df -h / | awk '/\// {print $5}')
 
     # Crear el informe
     echo "Informe de Monitoreo - $timestamp" > "$report_file"

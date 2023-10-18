@@ -1,46 +1,78 @@
 #!/bin/bash
 
-# Directorios de entrada
-input_dirs=("images" "audio" "text")
+# Directorio de salida
+IMAGE_DIR="outputs/images"
+TEXT_DIR="outputs/text"
+AUDIO_DIR="outputs/audio"
 
-# Ruta base
-base_dir="../outputs"
 
-# Función para renombrar archivos
-renombrar_archivos() {
+# Verificar si la carpeta de salida existe, si no, crearla
+if [ ! -d "$IMAGE_DIR" ]; then
+    mkdir -p "$IMAGE_DIR"
+fi
+
+if [ ! -d "$TEXT_DIR" ]; then
+    mkdir -p "$TEXT_DIR"
+fi
+
+if [ ! -d "$AUDIO_DIR" ]; then
+    mkdir -p "$AUDIO_DIR"
+fi
+
+# Ruta completa del archivo recibido como argumento
+input_file="$1"
+
+# Verificar que se haya proporcionado un archivo como argumento
+if [ -z "$input_file" ]; then
+    echo "Error: Se requiere un archivo como argumento."
+    exit 1
+fi
+
+# Determinar el tipo de archivo utilizando el comando 'file'
+file_type=$(file -b --mime-type "$input_file")
+
+# Obtener la extensión del archivo
+extension="${input_file##*.}"
+
+# Directorio de salida principal
+output_dir="/tp/outputs"
+
+# Función para clasificar y mover el archivo
+clasificar_y_mover() {
     tipo_archivo="$1"
-    carpeta_origen="$base_dir/$tipo_archivo"
+    # Contar la cantidad de archivos en la carpeta de destino
+    contador=$(ls -R -1qA "$output_dir" | wc -l)
+    
+    # Crear el nombre de destino basado en el tipo de archivo, el contador y la extensión
+    nombre_destino="$tipo_archivo$contador.$extension"
+    
+    final_path="$output_dir/$tipo_archivo/$nombre_destino"
 
-    # Obtener la lista de archivos en la carpeta de origen
-    archivos=("$carpeta_origen"/*)
+    # Mover y renombrar el archivo al destino
 
-    # Contador para numerar los archivos
-    contador=1
+    mv -v $input_file $final_path
 
-    # Iterar sobre los archivos en la carpeta de origen
-    for archivo in "${archivos[@]}"; do
-        # Ignorar si no es un archivo regular
-        if [ ! -f "$archivo" ]; then
-            continue
-        fi
-
-        # Obtener la extensión del archivo
-        extension="${archivo##*.}"
-
-        # Crear el nuevo nombre basado en el tipo de archivo, el contador y la extensión
-        nuevo_nombre="$tipo_archivo$contador.$extension"
-
-        # Renombrar el archivo
-        mv "$archivo" "${archivo%/*}/$nuevo_nombre"
-
-        echo "Archivo renombrado: ${archivo%/*}/$nuevo_nombre"
-
-        # Incrementar el contador
-        contador=$((contador + 1))
-    done
+    echo "Archivo clasificado y movido a: $final_path"
 }
 
-# Iterar sobre los tipos de archivos
-for tipo in "${input_dirs[@]}"; do
-    renombrar_archivos "$tipo"
-done
+# Clasificar el archivo según su tipo y moverlo a la carpeta correspondiente
+case "$file_type" in
+    "text/plain")
+        clasificar_y_mover "text"
+        ;;
+    "audio/wav")
+        clasificar_y_mover "audio"
+        ;;
+    "audio/x-wav")
+        clasificar_y_mover "audio"
+        ;;
+    "image/png")
+        clasificar_y_mover "images"
+        ;;
+    *)
+        echo "Tipo de archivo no reconocido: $file_type"
+        exit 1
+        ;;
+esac
+
+
