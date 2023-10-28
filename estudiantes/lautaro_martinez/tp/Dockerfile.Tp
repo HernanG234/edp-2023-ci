@@ -1,0 +1,26 @@
+FROM debian:latest
+
+RUN apt-get update -y
+RUN apt-get install bash -y
+RUN apt-get install curl -y
+RUN apt-get install cron -y
+RUN apt-get install procps -y
+RUN apt-get install file -y
+RUN apt-get install wget -y
+    
+COPY . /tp
+
+WORKDIR /tp
+
+RUN rm -rf outputs
+RUN mkdir -p outputs/text
+RUN mkdir -p outputs/audio
+RUN mkdir -p outputs/images
+
+RUN chmod +x /tp/modulo_usuario/menu.sh
+RUN chmod +x /tp/modulo_usuario/clasificador.sh
+RUN chmod +x /tp/modulo_usuario/compresor.sh
+RUN chmod +x /tp/modulo_usuario/descargador.sh
+RUN chmod +x /tp/modulo_usuario/monitor.sh
+
+CMD ["/tp/modulo_usuario/menu.sh"]
