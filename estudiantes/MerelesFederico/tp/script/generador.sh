@@ -14,7 +14,7 @@ then
 	echo "texto generado"
 
 
-	mv file.txt ./outputs/$NombreTxt # Movemos el archivo y lo renombramos con su hash correspondiente.
+	mv /root/file.txt /outputs/$NombreTxt # Movemos el archivo generado dentro del contenedor que se generan en la carpeta root y lo renombramos con su hash correspondiente.
 
 
 elif [ $SELECT == 2 ]
@@ -27,7 +27,7 @@ then
 
 	NombreAudio=($(md5sum out.wav)) # Obtenemos el hash de verificacion
 
-	mv out.wav ./outputs/$NombreAudio # Movemos el archivo generado y lo renombramos con su hash correspondiente.
+	mv /root/out.wav /outputs/$NombreAudio # Movemos el archivo generado dentro del contenedor que se generan en la carpeta root y lo renombramos con su hash correspondiente.
 
 else
 	# Generamos un archivo de imagen
@@ -37,7 +37,7 @@ else
 
 	NombreImagen=($(md5sum noise.png)) # obtenemos el hash de verificacion
 
-	mv noise.png ./outputs/$NombreImagen # Movemos el archivo generado y lo renombramos con su hash correspondiente.
+	mv /root/noise.png /outputs/$NombreImagen # Movemos el archivo generado dentro del contenedor que se generan en la carpeta root y lo renombramos con su hash correspondiente.
 
 fi
 

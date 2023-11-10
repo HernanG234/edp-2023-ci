@@ -1,0 +1,37 @@
+#!/bin/bash
+
+download_files() {
+    # Servidor FTP 
+    ftp_server="ftp://tuiaedpuser:tuiaedpuser@0.0.0.0"
+
+    # Verificar argumentos
+    if [ $# -lt 2 ]; then
+        echo "Argumentos inválidos"
+        exit 1
+    fi
+
+    # Directorio de salida y cantidad de archivos a descargar
+    output_dir="../tmp/outputs/descarga"
+    number="$2"
+
+    echo "Directorio de salida: $output_dir"
+    echo "Número de archivos a descargar: $number"
+
+    # Limpiar y crear directorio de salida
+    rm -rf "$output_dir"
+    mkdir -p "$output_dir"
+
+    # Obtener lista de archivos disponibles en el servidor FTP
+    files=$(curl -s -l "$ftp_server" | sort -R | head -n "$number")
+
+    # Descargar archivos aleatorios del servidor FTP
+    for archivo in $files; do
+        curl -s -o "$output_dir/$archivo" "$ftp_server/$archivo"
+        echo "Descargando $output_dir/$archivo"
+    done
+
+    echo "Descarga completada."
+}
+
+# Llamar a la función para descargar archivos
+download_files "$output_dir" "$2"

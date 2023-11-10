@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Hola" $USER
+echo "Salida de archivo posicionado en:" $PWD

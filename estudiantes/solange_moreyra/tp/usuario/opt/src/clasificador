@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# Definir la ruta al directorio de entrada y al directorio de descarga
+input_dir="../tmp/outputs/descarga"
+output_dir="../tmp/outputs/clasificador"
+
+# Crear el directorio de salida y los subdirectorios necesarios
+mkdir -p "$output_dir/empty"
+mkdir -p "$output_dir/txt"
+mkdir -p "$output_dir/snd"
+mkdir -p "$output_dir/img"
+
+txt_cont=1
+wav_cont=1
+png_cont=1
+
+# Función para clasificar un archivo
+classify_file() {
+    filename="$1"
+    mime_type=$(file -b --mime "$filename")
+
+    if echo "$mime_type" | grep -q "text"; then
+        category="txt"
+        output_cat_dir="$output_dir/txt"
+        rename="texto${txt_cont}.txt"
+        ((txt_cont++))
+    elif echo "$mime_type" | grep -q "audio"; then
+        category="snd"
+        output_cat_dir="$output_dir/snd"
+        rename="audio${wav_cont}.wav"
+        ((wav_cont++))
+    elif echo "$mime_type" | grep -q "image"; then
+        category="img"
+        output_cat_dir="$output_dir/img"
+        rename="image${png_cont}.png"
+        ((png_cont++))
+    else
+        if [ -s "$filename" ]; then
+            category="otros"
+            output_cat_dir="$output_dir/otros"
+        else
+            category="empty"
+            output_cat_dir="$output_dir/empty"
+        fi
+    fi
+
+    mkdir -p "$output_cat_dir"
+    mv "$filename" "$output_cat_dir/$rename"
+}
+
+# Comprobar si existen archivos en el directorio de entrada
+if [ -z "$(ls -A "$input_dir")" ]; then
+    echo "No hay archivos para procesar en el directorio de entrada."
+else
+    # Procesar archivos en el directorio de entrada
+    for file in "$input_dir"/*; do
+        if [ -f "$file" ]; then
+            classify_file "$file"
+        fi
+    done
+fi
+echo "Listo."
+
+# Contar y mostrar cuántos archivos vacíos se movieron
+empty_count=$(find "$output_dir/empty" -type f | wc -l)
+echo "Se movieron $empty_count archivos vacíos a $output_dir/empty."
+
+# Contar y mostrar cuántos archivos de audio se movieron
+snd_count=$(find "$output_dir/snd" -type f | wc -l)
+echo "Se movieron $snd_count archivos de audio a $output_dir/snd."
+
+# Contar y mostrar cuántos archivos de imagen se movieron
+img_count=$(find "$output_dir/img" -type f | wc -l)
+echo "Se movieron $img_count archivos de imagen a $output_dir/img."
+
+# Contar y mostrar cuántos archivos de texto se movieron
+txt_count=$(find "$output_dir/txt" -type f | wc -l)
+echo "Se movieron $txt_count archivos de texto a $output_dir/txt."

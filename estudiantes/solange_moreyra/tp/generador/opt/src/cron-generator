@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Ruta al directorio donde se almacenarán los archivos generados
+OUTPUT_DIR="/tmp/outputs"
+
+# Función para generar un archivo de texto aleatorio
+generate_text_file() {
+    filename="$OUTPUT_DIR/text_$(date +%Y_%m_%d-%H:%M:%S_).txt"
+    base64 /dev/urandom | head -c 500 > "$filename"
+    calculate_hash "$filename"
+}
+
+# Función para generar un archivo de sonido aleatorio
+generate_sound_file() {
+    filename="$OUTPUT_DIR/sound_$(date +%Y_%m_%d-%H:%M:%S_).wav"
+    ffmpeg -f lavfi -i "anoisesrc=a=0.1:c=white:duration=5" "$filename"
+    calculate_hash "$filename"
+}
+
+# Función para generar una imagen aleatoria
+generate_image_file() {
+    filename="$OUTPUT_DIR/image_$(date +%Y_%m_%d-%H:%M:%S_).png"
+    convert -size 100x100 xc: +noise Random "$filename"
+    calculate_hash "$filename"
+}
+
+# Función para calcular el hash de un archivo y renombrarlo
+calculate_hash() {
+    filename="$1"
+    hash=$(md5sum "$filename" | awk '{print $1}')
+    new_filename="${filename%.*}_$hash.${filename##*.}"
+    mv "$filename" "$new_filename"
+}
+
+# Crear el directorio de salida si no existe
+mkdir -p "$OUTPUT_DIR"
+
+# Llamar a las funciones para generar archivos aleatorios
+generate_text_file
+generate_sound_file
+generate_image_file
+

@@ -1,0 +1,4 @@
+#!/bin/bash/
+
+tar -czvf ../tmp/outputs.tar.gz ../tmp/outputs
+echo "Comprimido."
